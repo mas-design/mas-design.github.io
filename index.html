@@ -149,7 +149,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Multi-agent systems (MAS) leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce SELF-MAS, the first self-supervised, inference-time only framework for automatic MAS design. SELF-MAS employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on solvability and completeness. Experiments across math, graduate-level QA, and software engineering benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that SELF-MAS outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-supervised design for creating effective and adaptive MAS.
+            <strong>Multi-agent systems (MAS)</strong> leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce <span style="font-variant: small-caps;">Self-MAS</span>, the <strong>first self-supervised, inference-time only framework for automatic MAS design</strong>. <span style="font-variant: small-caps;">Self-MAS</span> employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on solvability and completeness. Experiments across math, graduate-level QA, and software engineering benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that SELF-MAS outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-supervised design for creating effective and adaptive MAS.
           </p>
         </div>
       </div>
@@ -159,18 +159,34 @@
 
 <div class="columns is-centered">
   <div class="column is-three-fifths">
-    <h2 class="title is-3 has-text-centered">Overview</h2>
+    <h2 class="title is-3 has-text-centered">Approach</h2>
         <div class="content has-text-justified">
           <p>
-            As shown in <strong>Figure 1</strong>, this area has rapidly gained research attention,
-            often referred to as LLM reasoning or reasoning language model. Reasoning requires LLMs to go beyond directly producing an answer from a question; instead, they must
-            generate the thinking process (implicitly or explicitly) in the form of 'question → reasoning steps → answer'. Building on this, the ability of LLMs to reason effectively depends on two factors: <strong>how and at what stage reasoning is achieved</strong>, and <strong>what components are involved in the reasoning process</strong>. Accordingly, in this survey, we categorize existing research into two orthogonal dimensions (<strong>Figure 2</strong>): (1) Regime, refers to whether reasoning is achieved through inference-time strategies (aka. inference-time scaling) or through direct learning and adaptation (learning to reason); and (2) Architecture, refers to whether reasoning happens within a single, standalone LLM or within an interactive, agentic system. <strong>Figure 3</strong> outlines the structure of this survey.
+            We propose <span style="font-variant: small-caps;">Self-MAS</span>, a <strong>meta-agent</strong> that serves several roles (design, evaluate, and verify) and involves two steps:
+          </p>
+          <ol>
+            <li>
+              <strong>Meta-iterations:</strong>
+              <ol style="margin-top: 0;" type="a">
+                <li>Task Decomposition and propose sub-MAS for each sub-task</li>
+                <li>Evaluate the generated MAS design on solvability and completeness</li>
+              </ol>
+            </li>
+            <li>
+              <strong>Self-verification:</strong>
+              selects the most suitable outcome from the set of all candidate solutions generated throughout the meta-iteration process.
+            </li>
+          </ol>
+          
+          <p>
+            <strong>In the whole process:</strong> no validation set needed; Meta-level self-supervision on MAS design; Inference-time only.
           </p>
         </div>
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
           <img src="./figure/overview_with_prompt.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 1:</strong> Illustrations of <span style="font-variant: small-caps;">Self-MAS</span>.</figcaption>
+          <strong>Figure 1:</strong> Illustrations of <span style="font-variant: small-caps;">Self-MAS</span>. 
+          </figcaption>
         </figure>
 
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
@@ -182,6 +198,45 @@
 
         <h2 class="title is-3 has-text-centered">Key Takeaways</h2>
 
+
+        <div class="content">
+          <div class="notification is-info">
+            <strong>1. Inference-scaling helps MAS designs</strong><br>
+            Existing LLMs (may or may not train with the MAS design task) cannot do well on MAS design naively, but can improve significantly with inference-scaling.
+          </div>
+
+          <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+            <img src="./figure/iter_perf.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
+            <figcaption style="text-align: left;">
+            <strong>Figure 3:</strong> Performance vs. meta-iterations with GPT-4o.</figcaption>
+          </figure>
+
+
+          <div class="notification is-primary">
+            <strong>2. MAS helps improve performance</strong><br>
+            MAS/Structure knowledge can help improve over single LLM/agent — significant improvement (&gt;10%) across diverse LLMs and datasets. Can be further improved with a stronger verifier.
+          </div>
+        
+          <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+            <img src="./figure/pareto_front.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
+            <figcaption style="text-align: left;">
+            <strong>Figure 4:</strong> Scatter plots comparing the Pareto fronts of various GPT-4o-based systems on three benchmarks. <span style="color: #3273dc;">Manually designed MAS baselines are marked in blue</span> and <span style="color: #ff851b;">automatic MAS methods in orange</span>. <span style="color: #23a24d; font-variant: small-caps;">Self-MAS</span> is highlighted as a green star. <span style="font-variant: small-caps;">Self-MAS</span> delivers high performance at lower cost than comparable automatic MAS methods, establishing a new frontier for accuracy vs. cost trade-off.</figcaption>
+          </figure>
+
+          <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+            <img src="./figure/upper_bound.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
+            <figcaption style="text-align: left;">
+            <strong>Figure 5:</strong> <span style="color: #800080;">Performance gains (purple)</span> over <span style="color: #3273dc;">base performance (light blue)</span> given an oracle verifier. Automatic
+            MAS baselines (ADAS, AFlow, and MaAS) cannot integrate external verifieres, yielding zero improvement.</figcaption>
+          </figure>
+
+
+
+          <div class="notification is-success">
+            <strong>3. “Self-evolve” without outcome supervision is possible</strong><br>
+            Our “Self-evolve” method purely relies on its own generated data. A potential key is the need to execute code and verify intermediate outputs. Much more analysis and extensions are coming!
+          </div>
+        </div>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
