@@ -202,7 +202,7 @@
         <div class="content">
           <div class="notification is-info">
             <strong>1. Inference-scaling helps MAS designs</strong><br>
-            Existing LLMs (may or may not train with the MAS design task) cannot do well on MAS design naively, but can improve significantly with inference-scaling.
+            Off-the-shelf LLMs—often not trained on MAS design—struggle to design effective MAS when used directly. But with inference-time scaling (our meta-level strategy), their performance improves significantly.
           </div>
 
           <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
@@ -214,7 +214,7 @@
 
           <div class="notification is-primary">
             <strong>2. Structure matters. Verification amplifies it.</strong><br>
-            MAS/Structure knowledge can help improve over single LLM/agent — significant improvement (&gt;10%) across diverse LLMs and datasets. Can be further improved with a stronger verifier.
+           MAS design can boost performance by over 10% compared to a single LLM/agent. With a stronger verifier, the gains become even larger.
           </div>
         
           <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
@@ -234,7 +234,7 @@
 
           <div class="notification is-success">
             <strong>3. “Self-evolve” without outcome supervision is possible</strong><br>
-            Our “Self-evolve” method purely relies on its own generated data. A potential key is the need to execute code and verify intermediate outputs. Much more analysis and extensions are coming!
+            Our “Self-evolve” method purely relies on its own generated data. A potential key is that we execute code and verify intermediate outputs. More analysis and extensions are coming!
           </div>
         </div>
 
