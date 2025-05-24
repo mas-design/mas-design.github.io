@@ -190,8 +190,9 @@
             <li>
               <strong>Meta-iterations:</strong>
               <ol style="margin-top: 0;" type="a">
-                <li><strong>MAS-Design:</strong> Task Decomposition and propose sub-MAS for each sub-task</li>
-                <li><strong>MAS-Feedback:</strong> Evaluate the generated MAS design on solvability and completeness</li>
+                <li><strong>MAS-Design:</strong> Task Decomposition and propose sub-MAS for each sub-task. We frame the MAS design as code generation.</li>
+                <li><strong>MAS-Feedback:</strong> Evaluate the generated MAS design on solvability and completeness. We evalaute these metrics using intermediate outputs by executing the MAS code.
+                </li>
               </ol>
             </li>
             <li>
@@ -207,57 +208,66 @@
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
           <img src="./figure/overview_with_prompt.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 1:</strong> Illustrations of <span style="font-variant: small-caps;">Self-MAS</span>. 
+          <strong>Figure 3:</strong> Illustrations of <span style="font-variant: small-caps;">Self-MAS</span>. 
           </figcaption>
         </figure>
 
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
           <img src="./figure/example.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 2:</strong> A running example of <span style="font-variant: small-caps;">Self-MAS</span> (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
+          <strong>Figure 4:</strong> A running example of <span style="font-variant: small-caps;">Self-MAS</span> (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
         </figure>
 
 
         <h2 class="title is-3 has-text-centered">Key Takeaways</h2>
 
 
+        <div class="notification is-success">
+          <strong>1. “Self-evolve” without outcome supervision is possible</strong><br>
+          Our “Self-evolve” method purely relies on its own generated data. A potential key is that we execute code and verify intermediate outputs!
+        </div>
+
+
+        <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+          <img src="./figure/pareto_front.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
+          <figcaption style="text-align: left;">
+          <strong>Figure 5:</strong> Scatter plots comparing the Pareto fronts of various GPT-4o-based systems on three benchmarks. <span style="color: #3273dc;">Manually designed MAS baselines are marked in blue</span> and <span style="color: #ff851b;">automatic MAS methods in orange</span>. <span style="color: #23a24d; font-variant: small-caps;">Self-MAS</span> is highlighted as a green star. <span style="font-variant: small-caps;">Self-MAS</span> delivers high performance at lower cost than comparable automatic MAS methods, establishing a new frontier for accuracy vs. cost trade-off.</figcaption>
+        </figure>
+
+      
+
         <div class="content">
           <div class="notification is-info">
-            <strong>1. Inference-scaling helps MAS designs</strong><br>
+            <strong>2. Inference-scaling helps MAS designs</strong><br>
             Off-the-shelf LLMs—often not trained on MAS design—struggle to design effective MAS when used directly. But with inference-time scaling (our meta-level strategy), their performance improves significantly.
           </div>
 
           <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
             <img src="./figure/iter_perf.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
             <figcaption style="text-align: left;">
-            <strong>Figure 3:</strong> Performance vs. meta-iterations with GPT-4o.</figcaption>
+            <strong>Figure 6:</strong> Performance vs. meta-iterations with GPT-4o.</figcaption>
           </figure>
 
 
           <div class="notification is-primary">
-            <strong>2. Structure matters. Verification amplifies it.</strong><br>
+            <strong>3. Structure matters. Verification amplifies it.</strong><br>
            MAS design can boost performance by over 10% compared to a single LLM/agent. With a stronger verifier, the gains become even larger.
           </div>
         
-          <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
-            <img src="./figure/pareto_front.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
-            <figcaption style="text-align: left;">
-            <strong>Figure 4:</strong> Scatter plots comparing the Pareto fronts of various GPT-4o-based systems on three benchmarks. <span style="color: #3273dc;">Manually designed MAS baselines are marked in blue</span> and <span style="color: #ff851b;">automatic MAS methods in orange</span>. <span style="color: #23a24d; font-variant: small-caps;">Self-MAS</span> is highlighted as a green star. <span style="font-variant: small-caps;">Self-MAS</span> delivers high performance at lower cost than comparable automatic MAS methods, establishing a new frontier for accuracy vs. cost trade-off.</figcaption>
-          </figure>
+
 
           <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
             <img src="./figure/upper_bound.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
             <figcaption style="text-align: left;">
-            <strong>Figure 5:</strong> <span style="color: #800080;">Performance gains (purple)</span> over <span style="color: #3273dc;">base performance (light blue)</span> given an oracle verifier. Automatic
+            <strong>Figure 7:</strong> <span style="color: #800080;">Performance gains (purple)</span> over <span style="color: #3273dc;">base performance (light blue)</span> given an oracle verifier. Automatic
             MAS baselines (ADAS, AFlow, and MaAS) cannot integrate external verifieres, yielding zero improvement.</figcaption>
           </figure>
 
-
-
-          <div class="notification is-success">
-            <strong>3. “Self-evolve” without outcome supervision is possible</strong><br>
-            Our “Self-evolve” method purely relies on its own generated data. A potential key is that we execute code and verify intermediate outputs. More analysis and extensions are coming!
+          <div class="notification is-warning">
+            <strong>4. More analysis and extensions are coming</strong><br>
+            Stay tuned for deeper evaluations, broader domains, and stronger self-evolving systems!
           </div>
+
         </div>
 
 <section class="section" id="BibTeX">
