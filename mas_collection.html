@@ -67,6 +67,11 @@
         <input type="range" id="aime-sample" min="0" max="29" value="0">
         <span id="aime-value" class="slider-value">0</span>
       </div>
+      <div class="slider-wrapper">
+        <label for="aime-iteration">Iteration:</label>
+        <input type="range" id="aime-iteration" min="0" max="4" value="0">
+        <span id="aime-iteration-value" class="slider-value">0</span>
+      </div>
       <div id="aime24-gpt4o" class="llm-tab-content is-active">
         <div class="columns">
           <div class="column is-one-third">
@@ -169,48 +174,74 @@
 
 <script src="aime24_gpt4o_data.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('input[type="range"]').forEach(slider => {
-    const label = slider.nextElementSibling;
-    slider.addEventListener('input', () => {
-      label.textContent = slider.value;
-      const sampleId = slider.value;
-      // Update problem
-      document.getElementById('aime24-gpt4o-problem').textContent = aime24_gpt4o_problems[sampleId] || '<place_holder_problem>';
-      // Update code and re-highlight
-      const codeBlock = document.getElementById('aime24-gpt4o-code');
-      codeBlock.textContent = aime24_gpt4o_codes[sampleId] || '<place_holder_code>';
-      if (window.hljs) hljs.highlightElement(codeBlock);
+  document.addEventListener('DOMContentLoaded', () => {
+    const data = window.aime24_gpt4o_data || {};
+    const sampleSlider = document.getElementById('aime-sample');
+    const iterationSlider = document.getElementById('aime-iteration');
+    const sampleValue = document.getElementById('aime-value');
+    const iterationValue = document.getElementById('aime-iteration-value');
+    const problemEl = document.getElementById('aime24-gpt4o-problem');
+    const codeEl = document.getElementById('aime24-gpt4o-code');
+  
+    function updateContent(sampleId, iterationId = 0) {
+      const sampleData = data[sampleId];
+      if (!sampleData) return;
+  
+      const iterations = sampleData.iterations || [];
+      const iterationData = iterations[iterationId] || {};
+      problemEl.textContent = sampleData.problem || '<place_holder_problem>';
+      codeEl.textContent = iterationData.code || '<place_holder_code>';
+      if (window.hljs) hljs.highlightElement(codeEl);
+  
+      iterationSlider.max = iterations.length - 1;
+      iterationSlider.value = iterationId;
+      iterationValue.textContent = iterationId;
+    }
+  
+    sampleSlider.addEventListener('input', () => {
+      const sampleId = sampleSlider.value;
+      sampleValue.textContent = sampleId;
+      updateContent(sampleId, 0);  // reset to first iteration
     });
-  });
-
-  const datasetTabs = document.querySelectorAll('.tabs ul li[data-dataset]');
-  const datasetContents = document.querySelectorAll('.tab-content');
-  datasetTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      datasetTabs.forEach(t => t.classList.remove('is-active'));
-      tab.classList.add('is-active');
-      const target = tab.dataset.dataset;
-      datasetContents.forEach(content => content.classList.remove('is-active'));
-      document.getElementById(target).classList.add('is-active');
+  
+    iterationSlider.addEventListener('input', () => {
+      const sampleId = sampleSlider.value;
+      const iterationId = iterationSlider.value;
+      iterationValue.textContent = iterationId;
+      updateContent(sampleId, iterationId);
     });
-  });
-
-  const allLLMTabs = document.querySelectorAll('.tabs ul li[data-llm]');
-  allLLMTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const container = tab.closest('.tab-content');
-      const llmTabs = container.querySelectorAll('[data-llm]');
-      const llmContents = container.querySelectorAll('.llm-tab-content');
-      llmTabs.forEach(t => t.classList.remove('is-active'));
-      tab.classList.add('is-active');
-      llmContents.forEach(c => c.classList.remove('is-active'));
-      const llmTarget = tab.dataset.llm;
-      container.querySelector(`#${llmTarget}`).classList.add('is-active');
+  
+    // Tabs logic (unchanged)
+    const datasetTabs = document.querySelectorAll('.tabs ul li[data-dataset]');
+    const datasetContents = document.querySelectorAll('.tab-content');
+    datasetTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        datasetTabs.forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const target = tab.dataset.dataset;
+        datasetContents.forEach(content => content.classList.remove('is-active'));
+        document.getElementById(target).classList.add('is-active');
+      });
     });
+  
+    const allLLMTabs = document.querySelectorAll('.tabs ul li[data-llm]');
+    allLLMTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const container = tab.closest('.tab-content');
+        const llmTabs = container.querySelectorAll('[data-llm]');
+        const llmContents = container.querySelectorAll('.llm-tab-content');
+        llmTabs.forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        llmContents.forEach(c => c.classList.remove('is-active'));
+        const llmTarget = tab.dataset.llm;
+        container.querySelector(`#${llmTarget}`).classList.add('is-active');
+      });
+    });
+  
+    // Initial render
+    updateContent(0, 0);
   });
-});
-</script>
+  </script>
 
 </body>
 </html>

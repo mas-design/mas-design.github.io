@@ -149,7 +149,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            <strong>Multi-agent systems (MAS)</strong> leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce <span style="font-variant: small-caps;">Self-MAS</span>, the <strong>first self-supervised, inference-time only framework for automatic MAS design</strong>. <span style="font-variant: small-caps;">Self-MAS</span> employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on solvability and completeness. Experiments across math, graduate-level QA, and software engineering benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that SELF-MAS outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-supervised design for creating effective and adaptive MAS.
+            <strong>Multi-agent systems (MAS)</strong> leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce <span style="font-variant: small-caps;">Self-MAS</span>, the <strong>first self-supervised, inference-time only framework for automatic MAS design</strong>. <span style="font-variant: small-caps;">Self-MAS</span> employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on <strong>solvability</strong> and <strong>completeness</strong>. Experiments across <strong>math</strong>, <strong>graduate-level QA</strong>, and <strong>software engineering</strong> benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that SELF-MAS outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-supervised design for creating effective and adaptive MAS.
           </p>
         </div>
       </div>
@@ -159,6 +159,19 @@
 
 <div class="columns is-centered">
   <div class="column is-three-fifths">
+
+    <h2 class="title is-3 has-text-centered">Paradiagm</h2>
+
+    In conventional learning, human being gives expected output to the model, and the model learns to generate the expected output. In <strong> MAS or workflow design</strong>, human gives not only the expected output, but also the fixed structure of the MAS or workflow. This can be sub-optimal when agent preferneces diffe from human intuition. Moreover, manually designed MAS are hard to adapt to new tasks. In this work, we enable the <strong>machine to propose MAS or workflow design without human intervention</strong>, not even the final outcome supervision.
+    
+    <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+      <img src="./figure/paradiam.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
+      <figcaption style="text-align: left;">
+      <strong>Figure 1:</strong> Illustrations of our paradigm. 
+      </figcaption>
+    </figure>
+
+
     <h2 class="title is-3 has-text-centered">Approach</h2>
         <div class="content has-text-justified">
           <p>
