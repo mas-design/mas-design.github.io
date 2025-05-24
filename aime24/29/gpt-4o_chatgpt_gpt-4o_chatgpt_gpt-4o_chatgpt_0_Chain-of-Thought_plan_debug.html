@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .message {
+                padding: 8px 16px;
+                margin-bottom: 8px;
+                border-radius: 4px;
+            }
+            .message.user {
+                background-color: #B2DFDB;
+                color: #00695C;
+            }
+            .message.assistant {
+                background-color: #B39DDB;
+                color: #4527A0;
+            }
+            .message.system {
+                background-color: #EEEEEE;
+                color: #212121;
+            }
+            .role {
+                font-weight: bold;
+                margin-bottom: 4px;
+            }
+            .variant {
+                color: #795548;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            pre {
+                white-space: pre-wrap;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <h1>Metrics</h1>
+    <table>
+    <tr>
+        <th>Metric</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td><b>Score</b></td>
+        <td>0.0</td>
+    </tr>
+    
+    <tr>
+        <td>score:std</td>
+        <td>0.0</td>
+    </tr>
+    
+    </table>
+    
+    <h1>Examples</h1>
+    
+    
+<h3>Prompt conversation</h3>
+
+
+<div class="message system">
+    <div class="role">
+    system
+    
+    </div>
+    <div class="content">
+    <pre>You are a helpful assistant.
+
+Reply EXACTLY with the following JSON format.
+{&#39;thinking&#39;: &#39;Your thinking.&#39;, &#39;answer&#39;: &#39;Your answer. If the question is asked for a numeric result, Return ONLY an integer and DO NOT return anything other than the integer answer; If the question is asked for more than numeric results, Return what the question asked and make sure the answer is complete.&#39;}
+DO NOT MISS ANY REQUEST FIELDS and ensure that your response is a well-formed JSON object!
+
+</pre>
+    </div>
+</div>
+
+
+<div class="message user">
+    <div class="role">
+    user
+    
+    </div>
+    <div class="content">
+    <pre>There is a collection of $25$ indistinguishable white chips and $25$ indistinguishable black chips. Find the number of ways to place some of these chips in the $25$ unit cells of a $5\times5$ grid such that: 
+
+each cell contains at most one chip
+all chips in the same row and all chips in the same column have the same colour
+any additional chip placed on the grid would violate one or more of the previous two conditions.
+
+Please think step by step and then solve the task.</pre>
+    </div>
+</div>
+
+<h3>Sampled message</h3>
+
+<div class="message assistant">
+    <div class="role">
+    assistant
+    
+    </div>
+    <div class="content">
+    <pre>To solve this problem, we need to place the chips in such a way that each row and each column contains chips of only one color, and we use as many chips as possible without violating this condition. We have 25 white chips and 25 black chips, but each cell can contain at most one chip. We need to find an arrangement where adding any more chips would violate the condition that all chips in a row or column must be the same color. We can achieve this by filling either all rows or all columns with chips of the same color, but we cannot fill both all rows and all columns completely with chips, because that would require 50 chips, which we don&#39;t have. We can fill a k x k subgrid with chips of one color and leave the rest empty. The maximum k for which we can fill a k x k subgrid with the same color is 5, because we have 25 chips of each color and a 5x5 grid has 25 cells. Therefore, we can fill a 5x5 subgrid with one color, say white, and leave the rest of the grid empty. This satisfies the condition that all chips in the same row and column have the same color, and adding any more chips would violate this condition. There is only one such arrangement, as we are using all 25 chips of one color in the grid.
+
+Answer:1</pre>
+    </div>
+</div>
+<h3>Results</h3>
+<p>Correct Answer: 902</p>
+<p>Extracted Answer: 1</p>
+<p>Score: 0.0</p>
+    <hr>
+    
+    </body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MAS Collection</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+  <style>
+    .tab-content, .llm-tab-content { display: none; }
+    .tab-content.is-active, .llm-tab-content.is-active { display: block; }
+    pre {
+      background-color: #f5f5f5;
+      padding: 1em;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+    }
+    .mas-problem {
+      white-space: pre-wrap;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 1rem;
+    }
+    .slider-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .slider-wrapper label {
+      margin-right: 1rem;
+    }
+    .slider-value {
+      margin-left: 1rem;
+      font-weight: bold;
+    }
+    input[type="range"] {
+      accent-color: #d36ba1;
+    }
+  </style>
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">MAS Collection</h1>
+
+    <!-- Dataset Tabs -->
+    <div class="tabs is-boxed is-scrollable">
+      <ul>
+        <li class="is-active" data-dataset="aime24"><a>AIME24</a></li>
+        <li data-dataset="gpqa"><a>GPQA-Diamond</a></li>
+        <li data-dataset="swe"><a>SWE-Bench</a></li>
+      </ul>
+    </div>
+
+    <!-- Dataset Tab Contents -->
+    <div id="aime24" class="tab-content is-active" data-max="29">
+      <div class="tabs is-toggle is-small">
+        <ul>
+          <li class="is-active" data-llm="aime24-gpt4o"><a>GPT-4o</a></li>
+          <li data-llm="aime24-llama"><a>Llama3.3-70b</a></li>
+          <li data-llm="aime24-qwen"><a>Qwen2.5-32b</a></li>
+        </ul>
+      </div>
+      <div class="slider-wrapper">
+        <label for="aime-sample">Sample ID:</label>
+        <input type="range" id="aime-sample" min="0" max="29" value="0">
+        <span id="aime-value" class="slider-value">0</span>
+      </div>
+      <div id="aime24-gpt4o" class="llm-tab-content is-active">
+        <div class="columns">
+          <div class="column is-one-third">
+            <h4 class="title is-5">MAS Problem</h4>
+            <p class="mas-problem" id="aime24-gpt4o-problem">Every morning Aya goes for a $9$-kilometer-long walk and stops at a coffee shop afterwards. When she walks at a constant speed of $s$ kilometers per hour, the walk takes her 4 hours, including $t$ minutes spent in the coffee shop. When she walks $s+2$ kilometers per hour, the walk takes her 2 hours and 24 minutes, including $t$ minutes spent in the coffee shop. Suppose Aya walks at $s+\frac{1}{2}$ kilometers per hour. Find the number of minutes the walk takes her, including the $t$ minutes spent in the coffee shop.</p>
+          </div>
+          <div class="column is-two-thirds">
+            <h4 class="title is-5">MAS Code</h4>
+            <pre><code class="language-python" id="aime24-gpt4o-code">def forward(self, taskInfo):
+              from collections import Counter
+              sub_tasks = []
+              agents = []
+          
+              cot_instruction_1 = "Sub-task 1: Calculate the time taken to walk 9 km at s km/h without considering the coffee shop time."
+              cot_agent = LLMAgentBase(['thinking', 'answer'], 'Chain-of-Thought Agent', model=global_node_model, temperature=0.0)
+              thinking1, answer1 = cot_agent([taskInfo], cot_instruction_1, is_sub_task=True)
+              agents.append(f"CoT agent {cot_agent.id}, calculating time at s km/h, thinking: {thinking1.content}; answer: {answer1.content}")
+              sub_tasks.append(f"Sub-task 1 output: thinking - {thinking1.content}; answer - {answer1.content}")
+          
+              cot_instruction_2 = "Sub-task 2: Calculate the time taken to walk 9 km at s+2 km/h without considering the coffee shop time."
+              thinking2, answer2 = cot_agent([taskInfo], cot_instruction_2, is_sub_task=True)
+              agents.append(f"CoT agent {cot_agent.id}, calculating time at s+2 km/h, thinking: {thinking2.content}; answer: {answer2.content}")
+              sub_tasks.append(f"Sub-task 2 output: thinking - {thinking2.content}; answer - {answer2.content}")
+          
+              cot_reflect_instruction_3 = "Sub-task 3: Use the results from Sub-task 1 and Sub-task 2 to calculate s and t."
+              thinking3, answer3 = cot_agent([taskInfo, thinking1, answer1, thinking2, answer2], cot_reflect_instruction_3, is_sub_task=True)
+              agents.append(f"Reflexion CoT agent {cot_agent.id}, calculating s and t, thinking: {thinking3.content}; answer: {answer3.content}")
+              sub_tasks.append(f"Sub-task 3 output: thinking - {thinking3.content}; answer - {answer3.content}")
+          
+              cot_reflect_instruction_4 = "Sub-task 4: Based on the outputs from Sub-task 3, calculate the time it takes for Aya to walk 9 km at s+1/2 km/h, including the t minutes spent in the coffee shop."
+              thinking4, answer4 = cot_agent([taskInfo, thinking3, answer3], cot_reflect_instruction_4, is_sub_task=True)
+              agents.append(f"Reflexion CoT agent {cot_agent.id}, calculating final time, thinking: {thinking4.content}; answer: {answer4.content}")
+              sub_tasks.append(f"Sub-task 4 output: thinking - {thinking4.content}; answer - {answer4.content}")
+          
+              final_answer = self.make_final_answer(thinking4, answer4, sub_tasks, agents)
+              return final_answer</code></pre>
+          </div>
+        </div>
+      </div>
+      <div id="aime24-llama" class="llm-tab-content">
+        <div class="columns">
+          <div class="column is-one-third"><h4 class="title is-5">MAS Problem</h4><p class="mas-problem" id="aime24-llama-problem">&lt;place_holder_problem&gt;</p></div>
+          <div class="column is-two-thirds"><h4 class="title is-5">MAS Code</h4><pre><code class="language-python" id="aime24-llama-code">&lt;place_holder_code&gt;</code></pre></div>
+        </div>
+      </div>
+      <div id="aime24-qwen" class="llm-tab-content">
+        <div class="columns">
+          <div class="column is-one-third"><h4 class="title is-5">MAS Problem</h4><p class="mas-problem" id="aime24-qwen-problem">&lt;place_holder_problem&gt;</p></div>
+          <div class="column is-two-thirds"><h4 class="title is-5">MAS Code</h4><pre><code class="language-python" id="aime24-qwen-code">&lt;place_holder_code&gt;</code></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="gpqa" class="tab-content" data-max="197">
+      <div class="tabs is-toggle is-small">
+        <ul>
+          <li class="is-active" data-llm="gpqa-gpt4o"><a>GPT-4o</a></li>
+          <li data-llm="gpqa-llama"><a>Llama3.3-70b</a></li>
+          <li data-llm="gpqa-qwen"><a>Qwen2.5-32b</a></li>
+        </ul>
+      </div>
+      <div class="slider-wrapper">
+        <label for="gpqa-sample">Sample ID:</label>
+        <input type="range" id="gpqa-sample" min="0" max="197" value="0">
+        <span id="gpqa-value" class="slider-value">0</span>
+      </div>
+      <div id="gpqa-gpt4o" class="llm-tab-content is-active">
+        <div class="columns">
+          <div class="column is-one-third"><h4 class="title is-5">MAS Problem</h4><p class="mas-problem" id="gpqa-gpt4o-problem">&lt;place_holder_problem&gt;</p></div>
+          <div class="column is-two-thirds"><h4 class="title is-5">MAS Code</h4><pre><code class="language-python" id="gpqa-gpt4o-code">&lt;place_holder_code&gt;</code></pre></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="swe" class="tab-content" data-max="299">
+      <div class="tabs is-toggle is-small">
+        <ul>
+          <li class="is-active" data-llm="swe-gpt4o"><a>GPT-4o</a></li>
+          <li data-llm="swe-llama"><a>Llama3.3-70b</a></li>
+          <li data-llm="swe-qwen"><a>Qwen2.5-32b</a></li>
+        </ul>
+      </div>
+      <div class="slider-wrapper">
+        <label for="swe-sample">Sample ID:</label>
+        <input type="range" id="swe-sample" min="0" max="299" value="0">
+        <span id="swe-value" class="slider-value">0</span>
+      </div>
+      <div id="swe-gpt4o" class="llm-tab-content is-active">
+        <div class="columns">
+          <div class="column is-one-third"><h4 class="title is-5">MAS Problem</h4><p class="mas-problem" id="swe-gpt4o-problem">&lt;place_holder_problem&gt;</p></div>
+          <div class="column is-two-thirds"><h4 class="title is-5">MAS Code</h4><pre><code class="language-python" id="swe-gpt4o-code">&lt;place_holder_code&gt;</code></pre></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<script src="aime24_gpt4o_data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input[type="range"]').forEach(slider => {
+    const label = slider.nextElementSibling;
+    slider.addEventListener('input', () => {
+      label.textContent = slider.value;
+      const sampleId = slider.value;
+      // Update problem
+      document.getElementById('aime24-gpt4o-problem').textContent = aime24_gpt4o_problems[sampleId] || '<place_holder_problem>';
+      // Update code and re-highlight
+      const codeBlock = document.getElementById('aime24-gpt4o-code');
+      codeBlock.textContent = aime24_gpt4o_codes[sampleId] || '<place_holder_code>';
+      if (window.hljs) hljs.highlightElement(codeBlock);
+    });
+  });
+
+  const datasetTabs = document.querySelectorAll('.tabs ul li[data-dataset]');
+  const datasetContents = document.querySelectorAll('.tab-content');
+  datasetTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      datasetTabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      const target = tab.dataset.dataset;
+      datasetContents.forEach(content => content.classList.remove('is-active'));
+      document.getElementById(target).classList.add('is-active');
+    });
+  });
+
+  const allLLMTabs = document.querySelectorAll('.tabs ul li[data-llm]');
+  allLLMTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const container = tab.closest('.tab-content');
+      const llmTabs = container.querySelectorAll('[data-llm]');
+      const llmContents = container.querySelectorAll('.llm-tab-content');
+      llmTabs.forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      llmContents.forEach(c => c.classList.remove('is-active'));
+      const llmTarget = tab.dataset.llm;
+      container.querySelector(`#${llmTarget}`).classList.add('is-active');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
