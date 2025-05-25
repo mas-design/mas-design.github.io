@@ -43,6 +43,7 @@
 <section class="section">
   <div class="container">
     <h1 class="title has-text-centered">MAS Collection</h1>
+    <p class="has-text-centered has-text-grey-dark is-size-6">Check <a href="mas_template.html" target="_blank"><strong>MAS Template</strong></a> if you want to execute the MAS.</p>
 
     <!-- Dataset Tabs -->
     <div class="tabs is-boxed is-scrollable">
@@ -173,75 +174,73 @@
 <script>hljs.highlightAll();</script>
 
 <script src="aime24_gpt4o_data.js"></script>
+<script src="aime24_llama_data.js"></script>
+<script src="aime24_qwen_data.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const data = window.aime24_gpt4o_data || {};
     const sampleSlider = document.getElementById('aime-sample');
     const iterationSlider = document.getElementById('aime-iteration');
     const sampleValue = document.getElementById('aime-value');
     const iterationValue = document.getElementById('aime-iteration-value');
-    const problemEl = document.getElementById('aime24-gpt4o-problem');
-    const codeEl = document.getElementById('aime24-gpt4o-code');
   
-    function updateContent(sampleId, iterationId = 0) {
+    function updateContent(llm) {
+      const sampleId = sampleSlider.value;
+      const iterationId = iterationSlider.value;
+      const data = window[`aime24_${llm}_data`] || {};
+  
+      const problemEl = document.getElementById(`aime24-${llm}-problem`);
+      const codeEl = document.getElementById(`aime24-${llm}-code`);
       const sampleData = data[sampleId];
-      if (!sampleData) return;
+  
+      if (!sampleData) {
+        problemEl.textContent = '<place_holder_problem>';
+        codeEl.textContent = '<place_holder_code>';
+        return;
+      }
   
       const iterations = sampleData.iterations || [];
       const iterationData = iterations[iterationId] || {};
+  
       problemEl.textContent = sampleData.problem || '<place_holder_problem>';
       codeEl.textContent = iterationData.code || '<place_holder_code>';
       if (window.hljs) hljs.highlightElement(codeEl);
   
-      iterationSlider.max = iterations.length - 1;
+      iterationSlider.max = Math.max(0, iterations.length - 1);
       iterationSlider.value = iterationId;
       iterationValue.textContent = iterationId;
     }
   
+    function getActiveLLM() {
+      const activeTab = document.querySelector('#aime24 .tabs [data-llm].is-active');
+      return activeTab ? activeTab.dataset.llm.replace('aime24-', '') : 'gpt4o';
+    }
+  
     sampleSlider.addEventListener('input', () => {
-      const sampleId = sampleSlider.value;
-      sampleValue.textContent = sampleId;
-      updateContent(sampleId, 0);  // reset to first iteration
+      sampleValue.textContent = sampleSlider.value;
+      updateContent(getActiveLLM());
     });
   
     iterationSlider.addEventListener('input', () => {
-      const sampleId = sampleSlider.value;
-      const iterationId = iterationSlider.value;
-      iterationValue.textContent = iterationId;
-      updateContent(sampleId, iterationId);
+      iterationValue.textContent = iterationSlider.value;
+      updateContent(getActiveLLM());
     });
   
-    // Tabs logic (unchanged)
-    const datasetTabs = document.querySelectorAll('.tabs ul li[data-dataset]');
-    const datasetContents = document.querySelectorAll('.tab-content');
-    datasetTabs.forEach(tab => {
+    const llmTabs = document.querySelectorAll('#aime24 [data-llm]');
+    llmTabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        datasetTabs.forEach(t => t.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        const target = tab.dataset.dataset;
-        datasetContents.forEach(content => content.classList.remove('is-active'));
-        document.getElementById(target).classList.add('is-active');
-      });
-    });
-  
-    const allLLMTabs = document.querySelectorAll('.tabs ul li[data-llm]');
-    allLLMTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const container = tab.closest('.tab-content');
-        const llmTabs = container.querySelectorAll('[data-llm]');
-        const llmContents = container.querySelectorAll('.llm-tab-content');
         llmTabs.forEach(t => t.classList.remove('is-active'));
         tab.classList.add('is-active');
-        llmContents.forEach(c => c.classList.remove('is-active'));
+  
         const llmTarget = tab.dataset.llm;
-        container.querySelector(`#${llmTarget}`).classList.add('is-active');
+        document.querySelectorAll('#aime24 .llm-tab-content').forEach(c => c.classList.remove('is-active'));
+        document.getElementById(llmTarget).classList.add('is-active');
+  
+        updateContent(getActiveLLM());
       });
     });
   
-    // Initial render
-    updateContent(0, 0);
+    updateContent(getActiveLLM());
   });
   </script>
-
 </body>
 </html>
