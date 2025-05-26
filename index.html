@@ -7,7 +7,7 @@
         content="Automataic Multi-agent System Design">
   <meta name="keywords" content="LLM, Multi-agent Systems, Automatic Desin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meta-Design Matters: A Self-Design Multi-Agent System
+  <title>MAS-Zero: Designing Multi-Agent Systems with Zero Supervision
   </title>
 
 
@@ -76,10 +76,10 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-2 publication-title">
-              <span style="font-size: 80%">Meta-Design Matters:</span><br />
-              A Self-Design Multi-Agent System
+            <img src="./figure/mas_zero.png" alt="MAS-Zero Icon" style="height: 4.5rem; vertical-align: middle;">
+            <span style="font-variant: small-caps;">MAS-Zero:</span><br />
+              Designing Multi-Agent Systems with Zero Supervision
             </h1>
-
             <div class="is-size-5 publication-authors">
               <table style="width: 100%;">
                   <tr>
@@ -150,7 +150,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            <strong>Multi-agent systems (MAS)</strong> leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce <span style="font-variant: small-caps;">Self-MAS</span>, the <strong>first self-supervised, inference-time only framework for automatic MAS design</strong>. <span style="font-variant: small-caps;">Self-MAS</span> employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on <strong>solvability</strong> and <strong>completeness</strong>. Experiments across <strong>math</strong>, <strong>graduate-level QA</strong>, and <strong>software engineering</strong> benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that SELF-MAS outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-supervised design for creating effective and adaptive MAS.
+            <strong>Multi-agent systems (MAS)</strong> leveraging the impressive capabilities of Large Language Models (LLMs) hold significant potential for tackling complex tasks. However, most current MAS depend on manually designed agent roles and communication protocols. These manual designs often fail to align with the underlying LLMs' strengths and struggle to adapt to novel tasks. Recent automatic MAS approaches attempt to mitigate these limitations but typically necessitate a validation-set for tuning and yield static MAS designs lacking adaptability during inference. We introduce <span style="font-variant: small-caps;">MAS-Zero</span>, the <strong>first self-evolved, inference-time only framework for automatic MAS design</strong>. <span style="font-variant: small-caps;">MAS-Zero</span> employs meta-level design to iteratively generate, evaluate, and refine MAS configurations tailored to each problem instance, without requiring a validation set. Critically, it enables dynamic agent composition and problem decomposition through meta-feedback on <strong>solvability</strong> and <strong>completeness</strong>. Experiments across <strong>math</strong>, <strong>graduate-level QA</strong>, and <strong>software engineering</strong> benchmarks, using both closed-source and open-source LLM back-bones of varying sizes, demonstrate that <span style="font-variant: small-caps;">MAS-Zero</span> outperforms both manual and automatic MAS baselines, achieving a 7.44% average accuracy improvement over the next strongest baseline while maintaining cost-efficiency. These findings underscore the promise of meta-level self-evolved design for creating effective and adaptive MAS.
           </p>
         </div>
       </div>
@@ -175,9 +175,9 @@
     <h2 class="title is-3 has-text-centered">Contrast with Existing Work</h2>
 
     <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
-      <img src="./figure/contrast.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
+      <img src="./figure/contrast_high_level.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
       <figcaption style="text-align: left;">
-      <strong>Figure 2:</strong> Manual MAS design vs. Existing automatic MAS design vs. <span style="font-variant: small-caps;">Self-MAS</span>. 
+      <strong>Figure 2:</strong> Manual MAS design vs. Existing automatic MAS design vs. <span style="font-variant: small-caps;">MAS-Zero</span>. 
       </figcaption>
     </figure>
 
@@ -185,11 +185,11 @@
     <h2 class="title is-3 has-text-centered">Approach</h2>
         <div class="content has-text-justified">
           <p>
-            We propose <span style="font-variant: small-caps;">Self-MAS</span>, a <strong>meta-agent</strong> that serves several roles (design, evaluate, and verify) and involves two steps:
+            We propose <span style="font-variant: small-caps;">MAS-Zero</span>, a <strong>meta-agent</strong> that serves several roles (design, evaluate, and verify) and involves two steps:
           </p>
           <ol>
             <li>
-              <strong>Meta-iterations:</strong>
+              <strong>Meta-Iterations:</strong>
               <ol style="margin-top: 0;" type="a">
                 <li><strong>MAS-Design:</strong> Task Decomposition and propose sub-MAS for each sub-task. We frame the MAS design as code generation.</li>
                 <li><strong>MAS-Feedback:</strong> Evaluate the generated MAS design on solvability and completeness. We evalaute these metrics using intermediate outputs by executing the MAS code.
@@ -197,7 +197,7 @@
               </ol>
             </li>
             <li>
-              <strong>Self-verification:</strong>
+              <strong>Self-Verification:</strong>
               selects the most suitable outcome from the set of all candidate solutions generated throughout the meta-iteration process.
             </li>
           </ol>
@@ -207,16 +207,16 @@
           </p>
         </div>
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
-          <img src="./figure/overview_with_prompt.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
+          <img src="./figure/overview_with_prompt_mas_zero.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 3:</strong> Illustrations of <span style="font-variant: small-caps;">Self-MAS</span>. 
+          <strong>Figure 3:</strong> Illustrations of <span style="font-variant: small-caps;">MAS-Zero</span>. 
           </figcaption>
         </figure>
 
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
           <img src="./figure/example.gif" alt="Growth Trend Figure" style="width: 100%; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 4:</strong> A running example of <span style="font-variant: small-caps;">Self-MAS</span> (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
+          <strong>Figure 4:</strong> A running example of <span style="font-variant: small-caps;">MAS-Zero</span> (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
         </figure>
 
 
@@ -225,14 +225,14 @@
 
         <div class="notification is-success">
           <strong>1. “Self-evolve” without outcome supervision is possible</strong><br>
-          <span style="font-variant: small-caps;">Self-MAS</span> purely relies on its own generated dataand sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
+          <span style="font-variant: small-caps;">MAS-Zero</span> purely relies on its own generated dataand sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
         </div>
 
 
         <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
-          <img src="./figure/pareto_front.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
+          <img src="./figure/pareto_frontier.png" alt="Growth Trend Figure" style="width: auto; height: auto;">
           <figcaption style="text-align: left;">
-          <strong>Figure 5:</strong> Scatter plots comparing the Pareto fronts of various GPT-4o-based systems on three benchmarks. <span style="color: #3273dc;">Manually designed MAS baselines are marked in blue</span> and <span style="color: #ff851b;">automatic MAS methods in orange</span>. <span style="color: #23a24d; font-variant: small-caps;">Self-MAS</span> is highlighted as a green star. <span style="font-variant: small-caps;">Self-MAS</span> delivers high performance at lower cost than comparable automatic MAS methods, establishing a new frontier for accuracy vs. cost trade-off.</figcaption>
+          <strong>Figure 5:</strong> Scatter plots comparing the Pareto fronts of various GPT-4o-based systems on three benchmarks. <span style="color: #ba32dc;">Manually designed MAS baselines are marked in purple</span> and <span style="color: #3273dc;">automatic MAS methods in blue</span>. <span style="color: #ff851b; font-variant: small-caps;">MAS-Zero</span><span style="color: #ff851b;"> is highlighted as an orange star</span>. <span style="font-variant: small-caps;">MAS-Zero</span> delivers high performance at lower cost than comparable automatic MAS methods, establishing a new frontier for accuracy vs. cost trade-off.</figcaption>
         </figure>
 
       
