@@ -1,6 +1,6 @@
 <div align="center">
 
-# Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
+#  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" style="height: 4.5rem; vertical-align: middle;">Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
 
 [![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.14996)    [![Project Page](https://img.shields.io/badge/Project%20Page-blue?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=black)](https://mas-design.github.io/)    [![Github](https://img.shields.io/badge/Code-000000?style=for-the-badge&logo=github&logoColor=000&logoColor=white)](https://github.com/SalesforceAIResearch/MAS-Zero)    [![MAS Collection](https://img.shields.io/badge/MAS_Collection-fcd022?style=for-the-badge&logo=huggingface&logoColor=000)](https://mas-design.github.io/mas_collection.html)
 
@@ -15,8 +15,8 @@
   <p>
     <a href="#getting-started" style="text-decoration: none; font-weight: bold;">✨ Getting Started</a> •
     <a href="#training" style="text-decoration: none; font-weight: bold;">🏋️ Design MAS with Zero Supervision</a> •
-    <a href="#usage" style="text-decoration: none; font-weight: bold;">🔧 Usage</a> •
-    <a href="#evaluation-code" style="text-decoration: none; font-weight: bold;">📃 Evaluation</a>
+    <!-- <a href="#usage" style="text-decoration: none; font-weight: bold;">🔧 Usage</a> • -->
+    <!-- <a href="#evaluation-code" style="text-decoration: none; font-weight: bold;">📃 Evaluation</a> -->
   </p>
   <p>
     <a href="#citation" style="text-decoration: none; font-weight: bold;">🎈 Citation</a> •
@@ -28,7 +28,7 @@
 
 </div>
 
-![Conceptual Overview](docs/contrast_high_level.png)
+![Conceptual Overview](figures/contrast_high_level.png)
 
 <!-- ============================================== -->
 
@@ -105,7 +105,7 @@
   <strong>In the whole process:</strong> no validation set needed; Meta-level self-supervision on MAS design; Inference-time only.
 </p>
 
-![MAS Zero Overview](docs/overview_with_prompt_mas_zero.gif)
+![MAS Zero Overview](figures/overview_with_prompt_mas_zero.gif)
 
 <!-- ============================================== -->
 <div align="left">
@@ -116,13 +116,13 @@
 ## Performance vs. Cost
 <span style="font-variant: small-caps;">MAS-Zero</span> sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
 
-![Performance cs. Cost](docs/pareto_frontier.png)
+![Performance cs. Cost](figures/pareto_frontier.png)
 
 ## All Results
 
 Our approach achieves strong performance across, mathmatical reasoning, graduate-level QA, and code benchmarks, accorss GT-4o, Llama3.3-70B and Qwen2.5-32B, without using any external supervision:
 
-![Overall Performance](docs/overall_results.png)
+![Overall Performance](figures/overall_results.png)
 
 
 <!-- ============================================== -->
@@ -153,7 +153,7 @@ python -m absolute_zero_reasoner.data_construction.process_code_reasoning_data
 
 <!-- ============================================== -->
 <div align="left">
-  <h1 id="training">🏋️ Training</h1>
+  <h1 id="training">🏋️ Design MAS with Zero Supervision</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
 
@@ -169,13 +169,14 @@ bash scripts/seeding/<7b|14b|coder3b|coder7b|coder14b|llama>.sh
 ``` -->
 
 ## ♟️ Search
-3b models need 2 X 80gb GPUs, 7/8b models need 4 X 80gb, 14b requires 8 X 80gb
+<!-- 3b models need 2 X 80gb GPUs, 7/8b models need 4 X 80gb, 14b requires 8 X 80gb
 ```bash
 bash scripts/selfplay/<7b|14b|coder3b|coder7b|coder14b|llama>.sh
-```
+``` -->
 You can change AIME to GPQA or SWE-Bench. You can also change meta_model and node_mode. Please refer to the sampler folder (we suuprt GPT, Claude, VLLM and TogetherAI)
 ```bash
 export OPENAI_API_KEY={YourKey}
+export TOGETHER_API_KEY={YourKey}
 
 python main_question.py  --dataset workflow_search/aime24 --option plan --meta_model gpt-4o_chatgpt --node_model gpt-4o_chatgpt --verifier_model gpt-4o_chatgpt --blocks COT COT_SC Reflexion LLM_debate --use_oracle_verifier --defer_verifier --n_generation 5 
 
