@@ -116,7 +116,7 @@
 ## Performance vs. Cost
 <span style="font-variant: small-caps;">MAS-Zero</span> sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
 
-![Performance cs. Cost](docs/pareto_frontier)
+![Performance cs. Cost](docs/pareto_frontier.png)
 
 ## All Results
 
@@ -145,11 +145,11 @@ pip install jinja2
 pip install -e human-eval
 ```
 
-## 💾 Data Processing
+<!-- ## 💾 Data Processing
 ### Process evaluation data on CruxEval / LiveCodeBench Execution during AZR Self-play
 ```bash
 python -m absolute_zero_reasoner.data_construction.process_code_reasoning_data
-```
+``` -->
 
 <!-- ============================================== -->
 <div align="left">
@@ -160,42 +160,43 @@ python -m absolute_zero_reasoner.data_construction.process_code_reasoning_data
 > **⚠️WARNING⚠️**: The Python executor in this repository is very raw and intended for research purposes only. It is not secure for production environments. We plan to update our executor to more secure implementations in the future. Your use of our code is at your own discretion and risk.
 
 
-## 🫛 Seeding (Optional)
+<!-- ## 🫛 Seeding (Optional)
 We provide the seed datasets we collected by prompting each model in data/. If you want to create your own seed data, use the following script:
 ```bash
 export OUTPUT_SEED_PATH=data/<new_ded_abd_seed_data_name>.jsonl
 export OUTPUT_CODE_F_SEED_PATH=data/<new_ind_seed_data_name>.jsonl
 bash scripts/seeding/<7b|14b|coder3b|coder7b|coder14b|llama>.sh
-```
+``` -->
 
-## ♟️ Self-play
+## ♟️ Search
 3b models need 2 X 80gb GPUs, 7/8b models need 4 X 80gb, 14b requires 8 X 80gb
 ```bash
 bash scripts/selfplay/<7b|14b|coder3b|coder7b|coder14b|llama>.sh
 ```
-If you want to use your own ded/abd or ind seed dataset:
+You can change AIME to GPQA or SWE-Bench. You can also change meta_model and node_mode. Please refer to the sampler folder (we suuprt GPT, Claude, VLLM and TogetherAI)
 ```bash
-export OUTPUT_SEED_PATH=data/<your_ded_abd_seed_data_name>.jsonl
-export OUTPUT_CODE_F_SEED_PATH=data/<your_ind_seed_data_name>.jsonl
-bash scripts/selfplay/<7b|14b|coder3b|coder7b|coder14b|llama>.sh
+export OPENAI_API_KEY={YourKey}
+
+python main_question.py  --dataset workflow_search/aime24 --option plan --meta_model gpt-4o_chatgpt --node_model gpt-4o_chatgpt --verifier_model gpt-4o_chatgpt --blocks COT COT_SC Reflexion LLM_debate --use_oracle_verifier --defer_verifier --n_generation 5 
+
 ```
 
-## 🌚 Resuming Runs
-When resuming runs, put the original run wandb id into the script, i.e., `trainer.wandb_run_id=<run_id>`.
+<!-- ## 🌚 Resuming Runs
+When resuming runs, put the original run wandb id into the script, i.e., `trainer.wandb_run_id=<run_id>`. -->
 
-## 🤗 Converting veRL checkpoints to HF format
+<!-- ## 🤗 Converting veRL checkpoints to HF format
 ```bash
 python -m absolute_zero_reasoner.utils.convert2hf \
   <veRL_ckpt_path>/actor \
   <veRL_ckpt_path>/actor/huggingface/ \
   <hf_ckpt_path>
-```
+``` -->
 
-## 📈Design Your Own Intrinsic Rewards!
-In configs, just add your own rewards to `azr.reward.generation_reward_config`, check the ones already implemented such as diversity and complexity rewards. Be Creative!
+<!-- ## 📈Design Your Own Intrinsic Rewards!
+In configs, just add your own rewards to `azr.reward.generation_reward_config`, check the ones already implemented such as diversity and complexity rewards. Be Creative! -->
 
 <!-- ============================================== -->
-<div align="left">
+<!-- <div align="left">
   <h1 id="usage">🔧 Usage</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
@@ -204,15 +205,15 @@ We use the Deepseek R1 <think> & <answer> tags as prompt template:
 
 ```
 A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., <think> reasoning process here </think> <answer> answer here </answer>. User: {question}\nAssistant: <think>
-```
+``` -->
 
 <!-- ============================================== -->
-<div align="left">
+<!-- <div align="left">
   <h1 id="evaluation-code">📃 Evaluation Code</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
 
-TODO
+TODO -->
 
 <!-- ============================================== -->
 <div align="left">
