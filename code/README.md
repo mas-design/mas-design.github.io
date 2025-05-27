@@ -2,7 +2,7 @@
 
 # Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
 
-[![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.14996)    [![Project Page](https://img.shields.io/badge/Project%20Page-blue?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=black)](https://mas-design.github.io/)    [![Github](https://img.shields.io/badge/Code-000000?style=for-the-badge&logo=github&logoColor=000&logoColor=white)](https://github.com/SalesforceAIResearch/MAS-Zero)    [![MAS Collection](https://img.shields.io/badge/AZR_Collection-fcd022?style=for-the-badge&logo=huggingface&logoColor=000)](https://mas-design.github.io/mas_collection.html)
+[![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.14996)    [![Project Page](https://img.shields.io/badge/Project%20Page-blue?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=black)](https://mas-design.github.io/)    [![Github](https://img.shields.io/badge/Code-000000?style=for-the-badge&logo=github&logoColor=000&logoColor=white)](https://github.com/SalesforceAIResearch/MAS-Zero)    [![MAS Collection](https://img.shields.io/badge/MAS_Collection-fcd022?style=for-the-badge&logo=huggingface&logoColor=000)](https://mas-design.github.io/mas_collection.html)
 
 <div align="center" style="font-family: Arial, sans-serif;">
   <p>
@@ -32,7 +32,7 @@
 
 <!-- ============================================== -->
 
-- **[2025/05/06]** We present the **MAS-Zero** [[Project Page](https://mas-design.github.io/) | [Paper](https://arxiv.org/abs/2505.14996) | [Code](https://github.com/SalesforceAIResearch/MAS-Zero)]
+- **[2025/05/06]** We present the **<span style="font-variant: small-caps;">MAS-Zero</span>** [[Project Page](https://mas-design.github.io/) | [Paper](https://arxiv.org/abs/2505.14996) | [Code](https://github.com/SalesforceAIResearch/MAS-Zero)]
  <!-- | [Model(s)](https://huggingface.co/collections/andrewzh/absolute-zero-reasoner-68139b2bca82afb00bc69e5b) | [Logs](https://wandb.ai/andrewzhao112/AbsoluteZeroReasoner)]. -->
 
 <!-- ============================================== -->
@@ -113,234 +113,17 @@
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
 
-## Main Results
+## Performance vs. Cost
+<span style="font-variant: small-caps;">MAS-Zero</span> sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
 
-Our approach achieves strong performance across both code and math reasoning benchmarks without using any external data:
+![Performance cs. Cost](docs/pareto_frontier)
 
-<table>
-  <thead>
-    <tr>
-      <th align="center">Model</th>
-      <th align="center">Base</th>
-      <th align="center">#data</th>
-      <th align="center">Code Avg</th>
-      <th align="center">Math Avg</th>
-      <th align="center">Total Avg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Base Models Section -->
-    <tr>
-      <td colspan="6" align="center"><b>Base Models</b></td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-7B</td>
-      <td>-</td>
-      <td>-</td>
-      <td>52.0</td>
-      <td>27.5</td>
-      <td>39.8</td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-7B-Ins</td>
-      <td>-</td>
-      <td>-</td>
-      <td>56.3</td>
-      <td>37.0</td>
-      <td>46.7</td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-7B-Coder</td>
-      <td>-</td>
-      <td>-</td>
-      <td>56.6</td>
-      <td>23.9</td>
-      <td>40.2</td>
-    </tr>
-    <!-- Zero-Style Reasoners with Code Data -->
-    <tr>
-      <td colspan="6" align="center"><b>Reasoners Trained on Curated Code Data</b></td>
-    </tr>
-    <tr>
-      <td>AceCoder-RM</td>
-      <td>Ins</td>
-      <td>22k</td>
-      <td>58.3</td>
-      <td>37.4</td>
-      <td>47.9</td>
-    </tr>
-    <tr>
-      <td>AceCoder-RM</td>
-      <td>Coder</td>
-      <td>22k</td>
-      <td>57.3</td>
-      <td>27.5</td>
-      <td>42.4</td>
-    </tr>
-    <tr>
-      <td>AceCoder-Rule</td>
-      <td>Ins</td>
-      <td>22k</td>
-      <td>55.4</td>
-      <td>36.9</td>
-      <td>46.2</td>
-    </tr>
-    <tr>
-      <td>AceCoder-Rule</td>
-      <td>Coder</td>
-      <td>22k</td>
-      <td>60.0</td>
-      <td>28.5</td>
-      <td>44.3</td>
-    </tr>
-    <tr>
-      <td>CodeR1-LC2k</td>
-      <td>Ins</td>
-      <td>2k</td>
-      <td>60.5</td>
-      <td>35.6</td>
-      <td>48.0</td>
-    </tr>
-    <tr>
-      <td>CodeR1-12k</td>
-      <td>Ins</td>
-      <td>10k</td>
-      <td>61.3</td>
-      <td>33.5</td>
-      <td>47.4</td>
-    </tr>
-    <!-- Zero-Style Reasoners with Math Data -->
-    <tr>
-      <td colspan="6" align="center"><b>Reasoners Trained on Curated Math Data</b></td>
-    </tr>
-    <tr>
-      <td>PRIME-Zero</td>
-      <td>Coder</td>
-      <td>484k</td>
-      <td>37.2</td>
-      <td><b>45.8</b></td>
-      <td>41.5</td>
-    </tr>
-    <tr>
-      <td>SimpleRL-Zoo</td>
-      <td>Base</td>
-      <td>8.5k</td>
-      <td>54.0</td>
-      <td>38.5</td>
-      <td>46.3</td>
-    </tr>
-    <tr>
-      <td>Oat-Zero</td>
-      <td>Math</td>
-      <td>8.5k</td>
-      <td>45.4</td>
-      <td>44.3</td>
-      <td>44.9</td>
-    </tr>
-    <tr>
-      <td>ORZ</td>
-      <td>Base</td>
-      <td>57k</td>
-      <td>55.6</td>
-      <td>41.6</td>
-      <td>48.6</td>
-    </tr>
-    <!-- Our Approach -->
-    <tr style="background-color: rgba(239, 142, 141, 0.1);">
-      <td colspan="6" align="center"><b>Absolute Zero Training w/ No Curated Data (Ours)</b></td>
-    </tr>
-    <tr style="background-color: rgba(239, 142, 141, 0.1);">
-      <td>AZR (Ours)</td>
-      <td>Base</td>
-      <td><b>0</b></td>
-      <td>55.2 <span style="color:#00AA00">+3.2</span></td>
-      <td>38.4 <span style="color:#00AA00">+10.9</span></td>
-      <td>46.8 <span style="color:#00AA00">+7.0</span></td>
-    </tr>
-    <tr style="background-color: rgba(87, 85, 163, 0.1);">
-      <td>AZR (Ours)</td>
-      <td>Coder</td>
-      <td><b>0</b></td>
-      <td><b>61.6</b> <span style="color:#00AA00">+5.0</span></td>
-      <td>39.1 <span style="color:#00AA00">+15.2</span></td>
-      <td><b>50.4</b> <span style="color:#00AA00">+10.2</span></td>
-    </tr>
-  </tbody>
-</table>
+## All Results
 
-## Scaling Results
+Our approach achieves strong performance across, mathmatical reasoning, graduate-level QA, and code benchmarks, accorss GT-4o, Llama3.3-70B and Qwen2.5-32B, without using any external supervision:
 
-AZR shows consistent improvements across model sizes and types:
+![Overall Performance](docs/overall_results.png)
 
-<table>
-  <thead>
-    <tr>
-      <th align="center">Model Family</th>
-      <th align="center">Variant</th>
-      <th align="center">Code Avg</th>
-      <th align="center">Math Avg</th>
-      <th align="center">Total Avg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Llama3.1-8b</td>
-      <td></td>
-      <td>28.5</td>
-      <td>3.4</td>
-      <td>16.0</td>
-    </tr>
-    <tr style="background-color: rgba(87, 85, 163, 0.1);">
-      <td>Llama3.1-8b</td>
-      <td>+ AZR (Ours)</td>
-      <td>31.6 <span style="color:#00AA00">+3.1</span></td>
-      <td>6.8 <span style="color:#00AA00">+3.4</span></td>
-      <td>19.2 <span style="color:#00AA00">+3.2</span></td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-3B Coder</td>
-      <td></td>
-      <td>51.2</td>
-      <td>18.8</td>
-      <td>35.0</td>
-    </tr>
-    <tr style="background-color: rgba(87, 85, 163, 0.1);">
-      <td>Qwen2.5-3B Coder</td>
-      <td>+ AZR (Ours)</td>
-      <td>54.9 <span style="color:#00AA00">+3.7</span></td>
-      <td>26.5 <span style="color:#00AA00">+7.7</span></td>
-      <td>40.7 <span style="color:#00AA00">+5.7</span></td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-7B Coder</td>
-      <td></td>
-      <td>56.6</td>
-      <td>23.9</td>
-      <td>40.2</td>
-    </tr>
-    <tr style="background-color: rgba(87, 85, 163, 0.1);">
-      <td>Qwen2.5-7B Coder</td>
-      <td>+ AZR (Ours)</td>
-      <td>61.6 <span style="color:#00AA00">+5.0</span></td>
-      <td>39.1 <span style="color:#00AA00">+15.2</span></td>
-      <td>50.4 <span style="color:#00AA00">+10.2</span></td>
-    </tr>
-    <tr>
-      <td>Qwen2.5-14B Coder</td>
-      <td></td>
-      <td>60.0</td>
-      <td>20.2</td>
-      <td>40.1</td>
-    </tr>
-    <tr style="background-color: rgba(87, 85, 163, 0.1);">
-      <td>Qwen2.5-14B Coder</td>
-      <td>+ AZR (Ours)</td>
-      <td>63.6 <span style="color:#00AA00">+3.6</span></td>
-      <td>43.0 <span style="color:#00AA00">+22.8</span></td>
-      <td>53.3 <span style="color:#00AA00">+13.2</span></td>
-    </tr>
-  </tbody>
-</table>
 
 <!-- ============================================== -->
 <div align="left">
