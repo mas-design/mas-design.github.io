@@ -1,6 +1,10 @@
 <div align="center">
 
-#  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" style="height: 1.5rem; vertical-align: middle;">Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
+<h1 align="center">
+  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" height="24" style="vertical-align: middle;">
+  Absolute Zero: Reinforced Self-play Reasoning with Zero Data
+</h1>
+<!-- #  Absolute Zero:  Reinforced Self-play Reasoning with Zero Data -->
 
 [![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.14996)    [![Project Page](https://img.shields.io/badge/Project%20Page-blue?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=black)](https://mas-design.github.io/)    [![Github](https://img.shields.io/badge/Code-000000?style=for-the-badge&logo=github&logoColor=000&logoColor=white)](https://github.com/SalesforceAIResearch/MAS-Zero)    [![MAS Collection](https://img.shields.io/badge/MAS_Collection-fcd022?style=for-the-badge&logo=huggingface&logoColor=000)](https://mas-design.github.io/mas_collection.html)
 
