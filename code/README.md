@@ -263,6 +263,15 @@ Many thanks to the authors of these projects for their excellent contributions!
 
 <!-- ============================================== -->
 <div align="left">
+  <h1 id="acknowledgement">🌻 Acknowledgement</h1>
+  <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
+</div>
+
+Our reinforcement learning training codebase is a fork of the [veRL framework](https://github.com/volcengine/verl). For rollouts, we used [vLLM](https://github.com/vllm-project/vllm). The Python executor components are adapted from the [QwQ Repository](https://github.com/QwenLM/QwQ/tree/main/eval/eval/math_opensource_utils). Additionally, we borrowed our README structure from [PRIME](https://github.com/PRIME-RL/PRIME).
+Many thanks to the authors of these projects for their excellent contributions!
+
+<!-- ============================================== -->
+<div align="left">
   <h1 id="contact">📧 Contact</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
