@@ -21,14 +21,14 @@
   <p>
     <a href="#citation" style="text-decoration: none; font-weight: bold;">🎈 Citation</a> •
     <a href="#acknowledgement" style="text-decoration: none; font-weight: bold;">🌻 Acknowledgement</a> •
-    <a href="#contact" style="text-decoration: none; font-weight: bold;">📧 Contact</a> •
+    <a href="#contact" style="text-decoration: none; font-weight: bold;">📧 Contact</a>
     <!-- <a href="#star-history" style="text-decoration: none; font-weight: bold;">📈 Star History</a> -->
   </p>
 </div>
 
 </div>
 
-![Absolute Zero Paradigm](assets/absolute_zero_paradigm.png)
+![Conceptual Overview](docs/contrast_high_level.png)
 
 <!-- ============================================== -->
 
@@ -43,39 +43,39 @@
 
 - 🏠 [[Project Page]](https://mas-design.github.io/)
 - 📜 [[Paper]](https://arxiv.org/abs/2505.14996)
-<!-- - 🤗 [[Models]](https://huggingface.co/collections/andrewzh/absolute-zero-reasoner-68139b2bca82afb00bc69e5b) -->
 - 💻 [[Code]](https://github.com/SalesforceAIResearch/MAS-Zero)
+<!-- - 🤗 [[Models]](https://huggingface.co/collections/andrewzh/absolute-zero-reasoner-68139b2bca82afb00bc69e5b) -->
 <!-- - 📁 [[Logs]](https://wandb.ai/andrewzhao112/AbsoluteZeroReasoner) -->
 
 <!-- ============================================== -->
-<div align="left">
+<!-- <div align="left">
   <h1 id="todo">📝 Roadmap</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
-</div>
+</div> -->
 
 <!-- Roadmap Item: Completed -->
-<div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(87, 85, 163, 0.1); border-left: 5px solid #5755A3; border-radius: 8px; display: flex; align-items: center;">
+<!-- <div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(87, 85, 163, 0.1); border-left: 5px solid #5755A3; border-radius: 8px; display: flex; align-items: center;">
   <span style="font-size: 1.2em; margin-right: 0.8rem; color: #5755A3;">✅</span>
-  <span style="text-decoration: line-through; color: #AAA; font-size: 1.1em;">Release training code</span> <!-- Increased size, lighter gray for contrast -->
-</div>
+  <span style="text-decoration: line-through; color: #AAA; font-size: 1.1em;">Release training code</span> Increased size, lighter gray for contrast -->
+<!-- </div> -->
 
 <!-- Roadmap Item: Pending -->
-<div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
+<!-- <div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
   <span style="font-size: 1.2em; margin-right: 0.8rem; color: #EF8E8D;">⏳</span>
-  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Release evaluation code</span> <!-- Increased size, color #FFF, slight bold -->
-</div>
+  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Release evaluation code</span> Increased size, color #FFF, slight bold -->
+<!-- </div> -->
 
 <!-- Roadmap Item: Pending -->
-<div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
+<!-- <div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
   <span style="font-size: 1.2em; margin-right: 0.8rem; color: #EF8E8D;">⏳</span>
-  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Update veRL</span> <!-- Increased size, color #FFF, slight bold -->
-</div>
+  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Update veRL</span> Increased size, color #FFF, slight bold -->
+<!-- </div> -->
 
 <!-- Roadmap Item: Pending -->
-<div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
+<!-- <div style="margin-bottom: 0.8rem; padding: 0.8rem 1.2rem; background-color: rgba(239, 142, 141, 0.2); border-left: 5px solid #EF8E8D; border-radius: 8px; display: flex; align-items: center;">
   <span style="font-size: 1.2em; margin-right: 0.8rem; color: #EF8E8D;">⏳</span>
-  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Upgrade Python executor</span> <!-- Increased size, color #FFF, slight bold -->
-</div>
+  <span style="color: #FFF; font-size: 1.1em; font-weight: 500;">Upgrade Python executor</span> Increased size, color #FFF, slight bold -->
+<!-- </div> -->
 
 <!-- ============================================== -->
 <div align="left">
@@ -83,15 +83,29 @@
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
 
-Our approach centers on a repeated iterative process of the following two steps:
+<p>
+  We propose <span style="font-variant: small-caps;">MAS-Zero</span>, a <strong>meta-agent</strong> that serves several roles (design, evaluate, and verify) and involves two steps:
+</p>
+<ol>
+  <li>
+    <strong>Meta-Iterations:</strong>
+    <ol style="margin-top: 0;" type="a">
+      <li><strong>MAS-Design:</strong> Task Decomposition and propose sub-MAS for each sub-task. We frame the MAS design as code generation.</li>
+      <li><strong>MAS-Feedback:</strong> Evaluate the generated MAS design on solvability and completeness. We evalaute these metrics using intermediate outputs by executing the MAS code.
+      </li>
+    </ol>
+  </li>
+  <li>
+    <strong>Self-Verification:</strong>
+    selects the most suitable outcome from the set of all candidate solutions generated throughout the meta-iteration process.
+  </li>
+</ol>
 
-1. <span style="color:#EF8E8D"><b>PROPOSE</b></span>: The model generates reasoning tasks from abduction, deduction, and induction types. Tasks are validated with Python execution and assigned a learnability reward.
+<p>
+  <strong>In the whole process:</strong> no validation set needed; Meta-level self-supervision on MAS design; Inference-time only.
+</p>
 
-2. <span style="color:#5755A3"><b>SOLVE</b></span>: The model then attempts to solve these self-generated tasks. Solutions are verified through Python execution, receiving an accuracy reward.
-
-The model continuously improves through both phases using TRR++, creating a self-evolving loop that strengthens reasoning without external training data.
-
-![Absolute Zero Reasoner](assets/azr.png)
+![MAS Zero Overview](docs/overview_with_prompt_mas_zero.gif)
 
 <!-- ============================================== -->
 <div align="left">
