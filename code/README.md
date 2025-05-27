@@ -1,7 +1,7 @@
 <div align="center">
 
 <h1 align="center">
-  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" height="24" style="vertical-align: middle;">
+  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" height="34" style="vertical-align: middle;">
   Absolute Zero: Reinforced Self-play Reasoning with Zero Data
 </h1>
 <!-- #  Absolute Zero:  Reinforced Self-play Reasoning with Zero Data -->
@@ -258,7 +258,7 @@ If you find Absolute Zero Reasoner helpful, please cite us.
   <h1 id="acknowledgement">🌻 Acknowledgement</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
-This project received help from many researchers at Salesforce AI Research. The code is adapted from the [ADAS framework](https://github.com/ShengranHu/ADAS). During development, we also referred to [simple-evals](https://github.com/openai/simple-evals), [MaAS](https://github.com/bingreeky/MaAS), and [AFlow](https://github.com/FoundationAgents/AFlow).  
+This project received help from many researchers at Salesforce AI Research. The code is adapted from the [ADAS](https://github.com/ShengranHu/ADAS). During development, we also referred to [simple-evals](https://github.com/openai/simple-evals), [MaAS](https://github.com/bingreeky/MaAS), and [AFlow](https://github.com/FoundationAgents/AFlow).  
 Many thanks to the authors of these projects for their excellent contributions!
 
 <!-- ============================================== -->
