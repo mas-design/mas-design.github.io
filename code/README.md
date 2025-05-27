@@ -1,6 +1,6 @@
 <div align="center">
 
-#  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" style="height: 4.5rem; vertical-align: middle;">Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
+#  <img src="./figures/mas_zero.png" alt="MAS-Zero Icon" style="height: 1.5rem; vertical-align: middle;">Absolute Zero:  Reinforced Self-play Reasoning with Zero Data
 
 [![Paper](https://img.shields.io/badge/paper-A42C25?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2505.14996)    [![Project Page](https://img.shields.io/badge/Project%20Page-blue?style=for-the-badge&logo=snowflake&logoColor=white&labelColor=black)](https://mas-design.github.io/)    [![Github](https://img.shields.io/badge/Code-000000?style=for-the-badge&logo=github&logoColor=000&logoColor=white)](https://github.com/SalesforceAIResearch/MAS-Zero)    [![MAS Collection](https://img.shields.io/badge/MAS_Collection-fcd022?style=for-the-badge&logo=huggingface&logoColor=000)](https://mas-design.github.io/mas_collection.html)
 
@@ -182,6 +182,19 @@ python main_question.py  --dataset workflow_search/aime24 --option plan --meta_m
 
 ```
 
+## 🔍 Verification
+
+You can change AIME to GPQA or SWE-Bench. Please refer to the sampler folder (we suuprt GPT, Claude, VLLM and TogetherAI)
+
+```bash
+export OPENAI_API_KEY={YourKey}
+export TOGETHER_API_KEY={YourKey}
+
+python main_judge.py  --dataset aime24 --judge_method self --baseline workflow_search --min_sample 0 --max_sample 30 --max_response_per_sample 5 
+
+```
+
+
 <!-- ## 🌚 Resuming Runs
 When resuming runs, put the original run wandb id into the script, i.e., `trainer.wandb_run_id=<run_id>`. -->
 
@@ -241,7 +254,7 @@ If you find Absolute Zero Reasoner helpful, please cite us.
   <h1 id="acknowledgement">🌻 Acknowledgement</h1>
   <hr style="height: 3px; background: linear-gradient(90deg, #EF8E8D, #5755A3); border: none; border-radius: 3px;">
 </div>
-This project received help from many researchers at Salesforce AI Research. The code is adapted from [ADAS framework](https://github.com/ShengranHu/ADAS/). In the development, we also refer to used [simple-evals](https://github.com/openai/simple-evals), [MaAS](https://github.com/bingreeky/MaAS) and [AFlow](https://github.com/FoundationAgents/AFlow).
+This project received help from many researchers at Salesforce AI Research. The code is adapted from the [ADAS framework](https://github.com/ShengranHu/ADAS). During development, we also referred to [simple-evals](https://github.com/openai/simple-evals), [MaAS](https://github.com/bingreeky/MaAS), and [AFlow](https://github.com/FoundationAgents/AFlow).  
 Many thanks to the authors of these projects for their excellent contributions!
 
 <!-- ============================================== -->
