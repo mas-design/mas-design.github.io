@@ -176,7 +176,7 @@
 
     <h2 class="title is-3 has-text-centered">Paradiagm</h2>
 
-    In conventional learning, humans give the expected output to the model, and the model learns to generate the same output. In <strong> manual MAS or workflow design</strong>, humans give not only the expected output, but also the fixed structure of the MAS or workflow. This can be sub-optimal when agent preferences differ from human intuition. Moreover, manually designed MAS are hard to adapt to new tasks. <strong>In this work</strong>, we enable the <strong>machine to propose MAS or workflow design without human intervention</strong>, not even the final outcome supervision.
+    In supervised learning (or reinforcement learning), humans give the expected output to the model, and the model learns to generate the same output. In <strong> manual MAS or workflow design</strong>, humans give not only the expected output, but also the fixed structure of the MAS or workflow. This can be sub-optimal when agent preferences differ from human intuition. Moreover, manually designed MAS are hard to adapt to new tasks. <strong>In this work</strong>, we enable the <strong>machine to propose MAS or workflow design without human intervention</strong>, not even the final outcome supervision.
     
     <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
       <img src="./figure/paradiam.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
@@ -226,18 +226,28 @@
           </figcaption>
         </figure>
 
-        <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
-          <img src="./figure/example.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
-          <figcaption style="text-align: left;">
-          <strong>Figure 4:</strong> An example comparing CoT, <span style="font-variant: small-caps;">MAS-Zero</span> (iteration 1), and <span style="font-variant: small-caps;">MAS-Zero</span> (iteration 5) (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
-        </figure>
-
 
         <h2 class="title is-3 has-text-centered">Key Takeaways</h2>
 
 
+        <div class="notification is-danger">
+          <strong>1. “MAS” moments</strong><br>
+          You might have encountered this: you give a complex task to a strong LLM, and it produces an incorrect answer. You then try to "help" by, for example, manually writing the plan, decomposing the task, listing required knowledge, or even acting as a manual verifier, by explicitly telling the model that an answer is incorrect and needs to be reconsidered—yet none of these work.
+          <br><br>
+          With <span style="font-variant: small-caps;">MAS-Zero</span>, we observe several “MAS” moments, where the system autonomously decides to act in ways we did not anticipate—and succeeds as a result.
+        </div>
+
+          <figure class="has-text-centered" style="max-width: 800px; margin: 2.5rem auto;">
+            <img src="./figure/example.png" alt="Growth Trend Figure" style="width: 100%; height: auto;">
+            <figcaption style="text-align: left;">
+            <strong>Figure 4:</strong> An example of "MAS" moment, comparing CoT, <span style="font-variant: small-caps;">MAS-Zero</span> (iteration 1), and <span style="font-variant: small-caps;">MAS-Zero</span> (iteration 5) (more at <a href="mas_collection.html"">[MAS Collection]</a>).</figcaption>
+          </figure>
+  
+
+
+        
         <div class="notification is-success">
-          <strong>1. “Self-evolve” without outcome supervision is possible</strong><br>
+          <strong>2. “Self-evolve” without outcome supervision works</strong><br>
           <span style="font-variant: small-caps;">MAS-Zero</span> purely relies on its own generated dataand sets a new frontier in the performance-cost trade-off across diverse domains and LLMs.
         </div>
 
@@ -252,7 +262,7 @@
 
         <div class="content">
           <div class="notification is-info">
-            <strong>2. Inference-scaling helps MAS designs</strong><br>
+            <strong>3. Inference-scaling helps MAS designs</strong><br>
             Off-the-shelf LLMs—often not trained on MAS design—struggle to design effective MAS when used directly. But with inference-time "scaling" (our meta-level strategy), their performance improves significantly.
           </div>
 
@@ -264,7 +274,7 @@
 
 
           <div class="notification is-primary">
-            <strong>3. Structure matters. Verification amplifies it.</strong><br>
+            <strong>4. Structure matters. Verification amplifies it.</strong><br>
            MAS design can boost performance by over 10% compared to a single LLM/agent. With a stronger verifier, the gains become even larger.
           </div>
         
@@ -278,7 +288,7 @@
           </figure>
 
           <div class="notification is-warning">
-            <strong>4. More analysis and extensions are coming</strong><br>
+            <strong>5. More analysis and extensions are coming</strong><br>
             Stay tuned for deeper evaluations, and stronger automatic MAS design systems!
           </div>
 
